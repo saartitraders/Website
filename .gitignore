@@ -1,0 +1,2 @@
+# Local build settings (path to the app folder differs per computer)
+_build/site.config.json

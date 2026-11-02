@@ -1,0 +1,4 @@
+{
+  "_note": "Copy this file to site.config.json (not committed) and set appDir to the SAARTI app folder on this computer. Office: F:\\SAARTI\\Saarti-DebtFree. Home: D:\\Saarti-DebtFree.",
+  "appDir": "F:\\SAARTI\\Saarti-DebtFree"
+}

@@ -1,0 +1,474 @@
+<!-- SAARTI home page design reference, approved by the owner on 2 Nov 2026. Rebuild index.html to match this layout. Image paths are relative to the WEBSITE folder. -->
+<title>SAARTI Website Mockup</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+/* Layout: app-first fintech landing. Curved sky-blue hero with phone + floating SAARTI cards, numbered steps strip,
+   service-card carousel, card-colour showcase, tabbed CIBIL section, FAQ with category tabs, deep navy footer.
+   Light theme only (brand rule), so colours are set once and explicitly. */
+:root{
+  color-scheme:light;
+  --blue:#1E8AE5; --blue-l:#60BAFB; --blue-d:#0C7FDF; --navy:#0B2440;
+  --ink:#1B2B3A; --muted:#64748B; --line:#E2ECF5;
+  --bg:#FFFFFF; --wash:#EEF7FD; --tint:#ECF6FE; --banner:#D6ECFD;
+  --ok:#22A861; --warn:#B45309;
+  --f-display:"Sora","Segoe UI",system-ui,sans-serif;
+  --f-body:"DM Sans","Segoe UI",system-ui,sans-serif;
+  --r:20px; --shadow:0 10px 30px rgba(30,58,95,.10); --shadow-s:0 4px 14px rgba(30,58,95,.08);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#fff}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0;color:var(--ink)}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:700 12px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.eyebrow::before{content:"";width:22px;height:8px;border-radius:9px;background:var(--blue);box-shadow:inset -8px 0 0 var(--blue-l)}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:13px 22px;font-weight:700;font-size:15px;border:2px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s;font-family:var(--f-body)}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(30,138,229,.30)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border-color:var(--blue);color:var(--blue);background:#fff}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--blue-l);outline-offset:3px}
+.mock-note{background:#FEF3E0;color:var(--warn);text-align:center;font-size:13px;font-weight:700;padding-block:6px}
+
+/* top utility bar */
+.util{background:var(--navy);color:#C9DAEC;font-size:13px}
+.util .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:8px;flex-wrap:wrap}
+.util span{display:inline-flex;align-items:center;gap:6px}
+.util svg{width:14px;height:14px;color:var(--blue-l)}
+.util-r{display:flex;gap:18px}
+.util a:hover{color:#fff}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{width:44px;height:44px;border-radius:12px;background:var(--wash)}
+.brand b{font:800 21px/1 var(--f-display);letter-spacing:.06em;display:block}
+.brand small{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.04em;margin-top:3px}
+.links{display:flex;gap:26px;font-weight:500;font-size:15px}
+.links a{position:relative;padding-block:6px}
+.links a.on{color:var(--blue)}
+.links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:3px;border-radius:3px;background:var(--blue)}
+.links a:hover{color:var(--blue)}
+.burger{display:none;background:none;border:0;padding:8px;color:var(--ink)}
+.burger svg{width:26px;height:26px}
+
+/* hero */
+.hero{position:relative;background:linear-gradient(160deg,#F5FBFF 0%,var(--wash) 55%,var(--banner) 100%);overflow:hidden}
+.hero::before{content:"";position:absolute;right:-12%;top:-30%;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 40%,var(--blue-l),var(--blue) 60%,var(--blue-d));opacity:.95}
+.hero::after{content:"";position:absolute;right:30%;bottom:-140px;width:360px;aspect-ratio:1;border-radius:50%;border:2px dashed rgba(30,138,229,.25)}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-block:64px 120px}
+.hero-copy{min-width:0;display:grid;gap:22px;align-content:start}
+.byline{font-size:15px;color:var(--muted)}
+.byline b{color:var(--blue);letter-spacing:.04em}
+.hero h1{font-size:clamp(34px,5vw,58px);font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--blue);position:relative;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:10px;background:var(--banner);z-index:-1;border-radius:4px}
+.hero p.lead{font-size:18px;color:var(--muted);max-width:52ch}
+.ctas{display:flex;gap:14px;flex-wrap:wrap}
+.trust-mini{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--ink);font-weight:500}
+.trust-mini span{display:inline-flex;gap:6px;align-items:center}
+.trust-mini svg{width:18px;height:18px;color:var(--ok)}
+
+.stage{position:relative;min-height:540px;min-width:0}
+.phone{position:relative;width:250px;max-width:100%;aspect-ratio:9/19.2;border-radius:38px;background:#0E1B2B;padding:10px;box-shadow:0 30px 60px rgba(12,40,80,.35)}
+.phone .scr{width:100%;height:100%;border-radius:30px;overflow:hidden;background:#fff}
+.phone .scr img{width:100%;height:100%;object-fit:cover;object-position:top}
+.stage .phone{position:absolute;left:50%;top:10px;transform:translateX(-35%)}
+
+.scard{position:absolute;width:250px;aspect-ratio:1.586;border-radius:18px;padding:18px 20px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 20px 40px rgba(12,40,80,.28);font-family:var(--f-body)}
+.scard .top{display:flex;justify-content:space-between;align-items:center;font:800 15px/1 var(--f-display);letter-spacing:.08em}
+.scard .top small{font:500 11px/1 var(--f-body);letter-spacing:.04em;opacity:.85}
+.chip{width:38px;height:28px;border-radius:6px;background:linear-gradient(135deg,#F6E7B0,#C9A957);position:relative;overflow:hidden}
+.chip::before{content:"";position:absolute;inset:8px 0;border-block:1px solid rgba(0,0,0,.25)}
+.scard .num{font:600 16px/1 var(--f-body);letter-spacing:.18em}
+.scard .bot{display:flex;justify-content:space-between;font-size:11px;opacity:.9;text-transform:uppercase;letter-spacing:.06em}
+.c-blue{background:linear-gradient(135deg,var(--blue-l),var(--blue) 55%,var(--blue-d))}
+.c-navy{background:linear-gradient(135deg,#25476D,#0B2440)}
+.c-teal{background:linear-gradient(135deg,#2BB6A3,#137A6E)}
+.c-violet{background:linear-gradient(135deg,#8B7CF6,#5B3FD0)}
+.c-rose{background:linear-gradient(135deg,#F37A8F,#C23B5A)}
+.stage .scard.a{left:0;top:70px;transform:rotate(-10deg)}
+.stage .scard.b{left:20px;top:250px;transform:rotate(-4deg);z-index:0}
+.float{position:absolute;z-index:3;background:#fff;border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow);font-size:13px;line-height:1.3;max-width:220px}
+.float b{display:block;font-size:14px}
+.float .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--tint);color:var(--blue);flex:none}
+.float .ic svg{width:20px;height:20px}
+.float.f1{right:0;top:60px}
+.float.f2{right:10px;bottom:40px}
+@media (prefers-reduced-motion:no-preference){
+  .float{animation:bob 5s ease-in-out infinite}.float.f2{animation-delay:-2.5s}
+  @keyframes bob{50%{transform:translateY(-8px)}}
+}
+
+/* steps strip (true sequence) */
+.steps{position:relative;z-index:2;margin-top:-72px}
+.steps-in{background:#fff;border-radius:24px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr)}
+.step{padding:26px 24px;display:grid;gap:8px;border-right:1px solid var(--line);min-width:0}
+.step:last-child{border-right:0}
+.step .n{font:800 30px/1 var(--f-display);color:var(--banner);-webkit-text-stroke:1.5px var(--blue)}
+.step h3{font-size:17px}
+.step p{font-size:14px;color:var(--muted)}
+
+section.block{padding-block:96px;overflow-x:clip}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.head h2{font-size:clamp(28px,3.6vw,40px);margin-top:12px}
+.head p{color:var(--muted);max-width:46ch}
+.center{text-align:center;justify-content:center}
+.center .head-in{display:grid;justify-items:center;gap:0}
+
+/* services carousel */
+.arrows{display:flex;gap:10px}
+.arrow{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--ink);cursor:pointer}
+.arrow:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.arrow svg{width:20px;height:20px}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3*22px)/4);gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 20px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.svc{scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;display:grid;gap:14px;align-content:start;transition:border-color .2s,box-shadow .2s,transform .2s;min-width:0}
+.svc:hover{border-color:var(--blue-l);box-shadow:var(--shadow);transform:translateY(-4px)}
+.svc .ic{width:56px;height:56px;border-radius:16px;background:var(--tint);color:var(--blue);display:grid;place-items:center}
+.svc .ic svg{width:28px;height:28px}
+.svc h3{font-size:19px}
+.svc p{color:var(--muted);font-size:15px}
+.svc .more{margin-top:6px;display:inline-flex;gap:6px;align-items:center;color:var(--blue);font-weight:700;font-size:14px;border:1.5px solid var(--banner);border-radius:999px;padding:8px 14px;justify-self:start}
+.svc .more svg{width:16px;height:16px}
+
+/* card showcase */
+.showcase{background:var(--wash)}
+.show-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.fan{position:relative;height:380px}
+.fan .scard{left:50%;top:50%;width:270px;transition:transform .5s}
+.fan .scard:nth-child(1){transform:translate(-50%,-50%) translate(-120px,40px) rotate(-16deg)}
+.fan .scard:nth-child(2){transform:translate(-50%,-50%) translate(-40px,0) rotate(-6deg)}
+.fan .scard:nth-child(3){transform:translate(-50%,-50%) translate(40px,-30px) rotate(4deg)}
+.fan .scard:nth-child(4){transform:translate(-50%,-50%) translate(110px,-60px) rotate(13deg)}
+.fan:hover .scard:nth-child(1){transform:translate(-50%,-50%) translate(-160px,50px) rotate(-20deg)}
+.fan:hover .scard:nth-child(4){transform:translate(-50%,-50%) translate(150px,-70px) rotate(17deg)}
+.util-card{background:#fff;border-radius:var(--r);padding:22px;box-shadow:var(--shadow-s);display:grid;gap:14px;margin-top:24px}
+.util-row{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+.util-row b{color:var(--ink);font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:9px;background:var(--tint);overflow:hidden}
+.bar i{display:block;height:100%;width:11%;border-radius:9px;background:var(--blue)}
+.checks{display:grid;gap:12px;margin-top:22px;padding:0;list-style:none}
+.checks li{display:flex;gap:10px;align-items:flex-start}
+.checks svg{width:22px;height:22px;flex:none;color:#fff;background:var(--blue);border-radius:50%;padding:4px}
+.example{font-size:12px;color:var(--muted);margin-top:10px}
+
+/* split: due */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.split-visual{position:relative;display:grid;place-items:center;min-height:520px;min-width:0}
+.split-visual::before{content:"";position:absolute;width:420px;max-width:100%;aspect-ratio:1;border-radius:50%;background:var(--wash)}
+.split-visual .phone{width:240px}
+.paid{position:absolute;left:0;bottom:70px;background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:16px 18px;width:230px;display:grid;gap:10px;font-size:14px}
+.paid .row{display:flex;justify-content:space-between;align-items:center}
+.pill{font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px}
+.pill.ok{background:#E6F6EE;color:#15803D}
+.pill.soon{background:#FEF3E0;color:var(--warn)}
+.remind{position:absolute;right:0;top:80px;background:var(--navy);color:#fff;border-radius:16px;padding:14px 16px;width:220px;font-size:13px;box-shadow:var(--shadow)}
+.remind b{display:block;font-size:14px;margin-bottom:2px}
+.remind small{color:#9DB7D3}
+
+/* tabs: CIBIL */
+.cibil{background:linear-gradient(180deg,#fff,var(--wash))}
+.tabbar{display:inline-flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px;margin-bottom:36px;flex-wrap:wrap}
+.tab{border:0;background:none;padding:11px 22px;border-radius:999px;font:700 15px var(--f-body);color:var(--muted);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(30,138,229,.3)}
+.panel{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center}
+.panel .phone{width:240px}
+.panel h3{font-size:28px;margin-bottom:14px}
+.panel p{color:var(--muted);max-width:52ch}
+.note{margin-top:18px;background:#fff;border:1px dashed var(--blue-l);border-radius:14px;padding:12px 16px;font-size:14px;color:var(--muted)}
+
+/* gallery */
+.gallery{display:grid;grid-auto-flow:column;grid-auto-columns:220px;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 26px;justify-content:center}
+.gallery figure{margin:0;scroll-snap-align:center;display:grid;gap:12px;justify-items:center}
+.gallery .phone{width:210px}
+.gallery figcaption{font-weight:700;font-size:15px}
+
+/* trust */
+.trust{background:var(--navy);color:#fff;border-radius:28px;padding:48px 44px;display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:center}
+.trust h2{color:#fff;font-size:32px}
+.trust p.sub{color:#B9CCE1;margin-top:12px}
+.trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.t-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;display:flex;gap:12px}
+.t-item svg{width:24px;height:24px;color:var(--blue-l);flex:none}
+.t-item b{display:block;margin-bottom:2px}
+.t-item span{color:#B9CCE1;font-size:14px}
+.trust a{color:var(--blue-l);font-weight:700}
+
+/* FAQ with categories */
+.faq{display:grid;grid-template-columns:280px 1fr;gap:36px;align-items:start}
+.cats{display:grid;gap:8px;position:sticky;top:96px}
+.cat{border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px 16px;text-align:left;font:600 15px var(--f-body);color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.cat svg{width:18px;height:18px;opacity:.5}
+.cat[aria-selected="true"]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.cat[aria-selected="true"] svg{opacity:1}
+.qs{display:grid;gap:12px;min-width:0}
+details{background:#fff;border:1px solid var(--line);border-radius:16px;padding:0 20px}
+details[open]{border-color:var(--blue-l);box-shadow:var(--shadow-s)}
+summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:700;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:600 22px/1 var(--f-display);color:var(--blue);flex:none}
+details[open] summary::after{content:"–"}
+details p{padding-bottom:18px;color:var(--muted)}
+
+/* CTA */
+.cta{background:linear-gradient(120deg,var(--blue-d),var(--blue) 50%,var(--blue-l));border-radius:28px;color:#fff;display:grid;grid-template-columns:1.3fr .7fr;overflow:hidden;position:relative}
+.cta::before{content:"";position:absolute;left:-80px;bottom:-120px;width:320px;aspect-ratio:1;border-radius:50%;border:40px solid rgba(255,255,255,.08)}
+.cta-copy{padding:52px 48px;display:grid;gap:18px;align-content:center;position:relative}
+.cta h2{color:#fff;font-size:clamp(28px,3.4vw,38px)}
+.cta p{color:#E3F1FD;max-width:44ch}
+.cta .btn-primary{background:#fff;color:var(--blue);box-shadow:none}
+.cta-photo{position:relative;min-height:300px}
+.cta-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%}
+
+/* footer */
+footer{background:var(--navy);color:#B9CCE1;margin-top:96px}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-block:64px 40px}
+footer h4{color:#fff;font:700 16px var(--f-display);margin:0 0 14px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px}
+footer a:hover{color:#fff}
+.f-brand{display:grid;gap:14px}
+.f-brand .brand b{color:#fff}
+.f-brand .brand small{color:#9DB7D3}
+.f-brand .brand small strong{color:var(--blue-l)}
+.disc{font-size:13px;line-height:1.55;border-left:3px solid var(--blue);padding-left:12px}
+.f-bot{border-top:1px solid rgba(255,255,255,.12);padding-block:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px}
+
+/* responsive */
+@media (max-width:980px){
+  .links,.util-r{display:none}.burger{display:block}
+  .hero .wrap{grid-template-columns:1fr;padding-block:40px 110px}
+  .hero::before{right:-40%;top:auto;bottom:-10%;width:110%}
+  .stage{min-height:500px}
+  .steps-in{grid-template-columns:repeat(2,1fr)}
+  .step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .rail{grid-auto-columns:calc((100% - 22px)/2)}
+  .show-grid,.split,.trust,.faq,.cta,.f-grid{grid-template-columns:1fr}
+  .split-visual{order:-1}
+  .panel{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .panel p{margin-inline:auto}
+  .cats{position:static;grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;padding-bottom:4px}
+  .gallery{justify-content:start}
+  .cta-photo{min-height:260px}
+  .f-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .stage{min-height:470px}
+  .stage .phone{width:210px;left:auto;right:0;transform:none}
+  .stage .scard{width:200px}
+  .stage .scard.b{top:220px}
+  .float.f1{right:auto;left:0;top:auto;bottom:0}
+  .float.f2{display:none}
+  .steps-in{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:0}
+  .rail{grid-auto-columns:84%}
+  .fan{height:300px}.fan .scard{width:200px}
+  .trust{padding:32px 22px}.trust-grid{grid-template-columns:1fr}
+  .cta-copy{padding:36px 24px}
+  .paid{left:-4px;width:200px}.remind{right:-4px;width:190px}
+  .split-visual{min-height:480px}
+  .f-grid{grid-template-columns:1fr}
+  section.block{padding-block:72px}
+}
+</style>
+
+
+<div class="util"><div class="wrap">
+  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>support@saarti.in</span>
+  <div class="util-r"><a href="#faq">Help &amp; FAQ</a><a href="#">Grievance Officer</a><a href="#">Delete account</a></div>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#"><img src="assets/images/brand/saarti-mark.png" alt="SAARTI logo"><span><b>SAARTI</b><small>Debt &amp; Financial Management</small></span></a>
+  <nav class="links" aria-label="Main"><a class="on" href="#">Home</a><a href="#features">Features</a><a href="#how">How it works</a><a href="#cibil">CIBIL</a><a href="#faq">FAQ</a><a href="#">About</a><a href="#">Contact</a></nav>
+  <a class="btn btn-primary" href="#" style="padding:10px 18px;font-size:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Coming soon</a>
+  <button class="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="hero-copy">
+    <span class="eyebrow">Debt &amp; Financial Management</span>
+    <h1>Every card and loan. <em>One clear</em> monthly plan.</h1>
+    <p class="lead">SAARTI keeps your credit cards, loans and EMIs in one place, shows what is due this month, reminds you before due dates and checks your CIBIL report against your own records.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Coming soon on Google Play</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+    <div class="trust-mini">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg>No card number, CVV or PIN</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7"/></svg>Made for India</span>
+    </div>
+    <p class="byline">A Product by <b>SAARTI TRADERS</b></p>
+  </div>
+  <div class="stage" aria-hidden="true">
+    <div class="scard c-navy a"><div class="top">SAARTI<small>Credit card</small></div><div class="chip"></div><div class="num">•••• •••• •••• 4821</div><div class="bot"><span>Due on 22nd</span><span>Limit ₹1,00,000</span></div></div>
+    <div class="scard c-blue b"><div class="top">SAARTI<small>Credit card</small></div><div class="chip"></div><div class="num">•••• •••• •••• 7730</div><div class="bot"><span>Due on 5th</span><span>11% used</span></div></div>
+    <div class="phone"><div class="scr"><img src="assets/images/screens/screen-1-home.jpg" alt=""></div></div>
+    <div class="float f1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21h4"/></svg></span><span><b>Bill reminder</b>3 days before your due date</span></div>
+    <div class="float f2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 5-6"/></svg></span><span><b>Limit vs utilisation</b>See how much of your limit you use</span></div>
+  </div>
+</div></section>
+
+<div class="wrap steps" id="how"><div class="steps-in">
+  <div class="step"><span class="n">01</span><h3>Add cards &amp; loans</h3><p>Type them in, or read them from your CIBIL report.</p></div>
+  <div class="step"><span class="n">02</span><h3>Upload your CIBIL PDF</h3><p>AI reads your score and accounts. The PDF is deleted after.</p></div>
+  <div class="step"><span class="n">03</span><h3>Compare &amp; fix</h3><p>See what does not match and how to raise a dispute.</p></div>
+  <div class="step"><span class="n">04</span><h3>Pay on time</h3><p>One monthly due, reminders, and mark bills as paid.</p></div>
+</div></div>
+
+<section class="block" id="features"><div class="wrap">
+  <div class="head"><div><span class="eyebrow">What SAARTI does</span><h2>Everything for your debt, in one app</h2></div>
+    <div class="arrows"><button class="arrow" data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button><button class="arrow" data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button></div></div>
+  <div class="rail" id="rail">
+    <article class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></span><h3>Cards &amp; loans</h3><p>Limit, outstanding, EMIs and due dates for every card and loan, in one list.</p><a class="more" href="#">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></article>
+    <article class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4M8 14l2 2 4-4"/></svg></span><h3>Monthly due</h3><p>One total for this month. Mark a bill as paid and the total updates.</p><a class="more" href="#">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></article>
+    <article class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21h4"/></svg></span><h3>Bill reminders</h3><p>Notifications on your phone before each due date. Only the bank name, never an amount.</p><a class="more" href="#">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></article>
+    <article class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h3>CIBIL PDF, read by AI</h3><p>Upload your report PDF. Your score and accounts are picked out for you.</p><a class="more" href="#">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></article>
+    <article class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h14l-3-3M21 17H7l3 3"/></svg></span><h3>Compare &amp; dispute</h3><p>CIBIL vs your own data, side by side. Steps to dispute on the CIBIL website.</p><a class="more" href="#">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></article>
+    <article class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 6h8M8 11h2M14 11h2M8 15h2M14 15h2M8 19h2M14 19h2"/></svg></span><h3>EMI calculator</h3><p>EMI, total interest and a year-by-year plan from amount, rate and tenure.</p><a class="more" href="#">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></article>
+    <article class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 21h16"/></svg></span><h3>Download your data</h3><p>Get everything you saved as a PDF or Excel file, any time.</p><a class="more" href="#">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></article>
+  </div>
+</div></section>
+
+<section class="block showcase"><div class="wrap show-grid">
+  <div class="fan" aria-hidden="true">
+    <div class="scard c-rose"><div class="top">SAARTI<small>Credit card</small></div><div class="chip"></div><div class="num">•••• 1209</div><div class="bot"><span>Card 4</span><span>Due 18th</span></div></div>
+    <div class="scard c-teal"><div class="top">SAARTI<small>Credit card</small></div><div class="chip"></div><div class="num">•••• 5561</div><div class="bot"><span>Card 3</span><span>Due 10th</span></div></div>
+    <div class="scard c-violet"><div class="top">SAARTI<small>Credit card</small></div><div class="chip"></div><div class="num">•••• 7730</div><div class="bot"><span>Card 2</span><span>Due 5th</span></div></div>
+    <div class="scard c-navy"><div class="top">SAARTI<small>Credit card</small></div><div class="chip"></div><div class="num">•••• 4821</div><div class="bot"><span>Card 1</span><span>Due 22nd</span></div></div>
+  </div>
+  <div>
+    <span class="eyebrow">Your cards</span>
+    <h2 style="font-size:clamp(28px,3.6vw,40px);margin-top:12px">Every card in its own colour</h2>
+    <p style="color:var(--muted);margin-top:14px;max-width:50ch">Pick a colour for each card so you know it at a glance. Each one shows its limit, outstanding, what is left, and how much of the limit you use.</p>
+    <div class="util-card">
+      <div class="util-row"><span>Limit</span><b>₹1,00,000</b></div>
+      <div class="util-row"><span>Outstanding</span><b>₹11,000</b></div>
+      <div class="bar"><i></i></div>
+      <div class="util-row"><span>Utilisation</span><b style="color:#15803D">11% used</b></div>
+    </div>
+    <p class="example">Example figures. We only ask for the last 4 digits of a card.</p>
+  </div>
+</div></section>
+
+<section class="block"><div class="wrap split">
+  <div class="split-visual" aria-hidden="true">
+    <div class="phone"><div class="scr"><img src="assets/images/screens/screen-3-monthly-due.jpg" alt=""></div></div>
+    <div class="paid"><div class="row"><b>Card bill</b><span class="pill ok">Paid</span></div><div class="row"><b>Home loan EMI</b><span class="pill soon">Due in 3 days</span></div></div>
+    <div class="remind"><b>Did you pay?</b><small>A due date passed. Tap Mark paid so your totals stay right.</small></div>
+  </div>
+  <div>
+    <span class="eyebrow">Monthly due</span>
+    <h2 style="font-size:clamp(28px,3.6vw,40px);margin-top:12px">Know what to pay this month</h2>
+    <p style="color:var(--muted);margin-top:14px;max-width:50ch">SAARTI adds up every card bill and loan EMI into one number, and takes off what you have already paid.</p>
+    <ul class="checks">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L20 7"/></svg>Card bills and loan EMIs in one total</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L20 7"/></svg>Mark paid, and your outstanding updates</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L20 7"/></svg>Reminders 3 days before, 1 day before and on the due date</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="block cibil" id="cibil"><div class="wrap">
+  <div class="head center"><div class="head-in"><span class="eyebrow">CIBIL report</span><h2>Check your report against your own records</h2></div></div>
+  <div style="text-align:center"><div class="tabbar" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-p="p1">1 · Upload PDF</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="p2">2 · Compare</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="p3">3 · Dispute</button>
+  </div></div>
+  <div class="panel" id="p1"><div class="phone"><div class="scr"><img src="assets/images/screens/screen-5-cibil-upload.jpg" alt="CIBIL tab in SAARTI with the Upload CIBIL Report button"></div></div>
+    <div><h3>Upload your CIBIL report PDF</h3><p>Download your report from the CIBIL website and upload the PDF in the CIBIL tab. AI reads your score, cards and loans from it. The PDF is deleted right after it is read; only the details picked out are kept.</p><div class="note">You choose to upload. SAARTI does not connect to your bank or to CIBIL.</div></div></div>
+  <div class="panel" id="p2" hidden><div class="phone"><div class="scr"><img src="assets/images/screens/screen-4-compare.jpg" alt="Compare tab showing CIBIL accounts next to manual accounts"></div></div>
+    <div><h3>See what does not match</h3><p>Compare puts the accounts on your CIBIL report next to the ones you typed in. Mark each row OK or Wrong, and flag accounts that are not yours.</p><div class="note">Comparing does not change your CIBIL report.</div></div></div>
+  <div class="panel" id="p3" hidden><div class="phone"><div class="scr"><img src="assets/images/screens/screen-2-my-data.jpg" alt="My Data tab with cards and loans"></div></div>
+    <div><h3>Raise a dispute on the CIBIL website</h3><p>If something on your report is wrong, the app shows you how to raise a dispute with CIBIL yourself, and keeps your own records correct in the meantime.</p><div class="note">SAARTI is not linked to CIBIL or TransUnion.</div></div></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <div class="head center"><div class="head-in"><span class="eyebrow">Inside the app</span><h2>A look at SAARTI</h2></div></div>
+  <div class="gallery">
+    <figure><div class="phone"><div class="scr"><img src="assets/images/screens/screen-1-home.jpg" alt="SAARTI Home dashboard" loading="lazy"></div></div><figcaption>Home</figcaption></figure>
+    <figure><div class="phone"><div class="scr"><img src="assets/images/screens/screen-2-my-data.jpg" alt="My Data tab" loading="lazy"></div></div><figcaption>My Data</figcaption></figure>
+    <figure><div class="phone"><div class="scr"><img src="assets/images/screens/screen-3-monthly-due.jpg" alt="Monthly Due" loading="lazy"></div></div><figcaption>Monthly Due</figcaption></figure>
+    <figure><div class="phone"><div class="scr"><img src="assets/images/screens/screen-4-compare.jpg" alt="Compare tab" loading="lazy"></div></div><figcaption>Compare</figcaption></figure>
+    <figure><div class="phone"><div class="scr"><img src="assets/images/screens/screen-5-cibil-upload.jpg" alt="CIBIL tab" loading="lazy"></div></div><figcaption>CIBIL</figcaption></figure>
+  </div>
+</div></section>
+
+<section><div class="wrap"><div class="trust">
+  <div><span class="eyebrow" style="color:var(--blue-l)">Privacy</span><h2 style="margin-top:12px">Your data, your control</h2><p class="sub">Read the full <a href="#">Privacy Policy</a> or <a href="#">delete your account</a>.</p></div>
+  <div class="trust-grid">
+    <div class="t-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><div><b>No sensitive codes</b><span>Never your full card number, CVV, PIN or bank password.</span></div></div>
+    <div class="t-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="m9 14 6 0"/></svg><div><b>PDF deleted after reading</b><span>Only the details picked out are kept.</span></div></div>
+    <div class="t-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m-5-5 5 5 5-5M4 21h16"/></svg><div><b>Download your data</b><span>As PDF or Excel, whenever you want.</span></div></div>
+    <div class="t-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/></svg><div><b>Delete any time</b><span>Delete your account and all your data from Profile.</span></div></div>
+  </div>
+</div></div></section>
+
+<section class="block" id="faq"><div class="wrap">
+  <div class="head"><div><span class="eyebrow">Help &amp; FAQ</span><h2>Questions people ask</h2></div><a class="btn btn-ghost" href="#">All questions</a></div>
+  <div class="faq">
+    <div class="cats" role="tablist">
+      <button class="cat" role="tab" aria-selected="true" data-c="c1">Data &amp; privacy <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+      <button class="cat" role="tab" aria-selected="false" data-c="c2">CIBIL report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+      <button class="cat" role="tab" aria-selected="false" data-c="c3">Dues &amp; reminders <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+    </div>
+    <div class="qs" id="c1">
+      <details open><summary>Is my data safe?</summary><p>Your data is saved in your SAARTI account with our cloud provider. Each user can see and change only their own records. We never ask for your full card number, CVV, PIN or bank passwords.</p></details>
+      <details><summary>Does SAARTI read my SMS, bank account or contacts?</summary><p>No. SAARTI does not read your SMS, contacts or location, and it does not connect to your bank account. Everything in My Data is what you type in.</p></details>
+    </div>
+    <div class="qs" id="c2" hidden>
+      <details open><summary>How do I get my CIBIL report PDF?</summary><p>Download your report as a PDF from the CIBIL website, then open the CIBIL tab and tap Upload CIBIL Report (PDF).</p></details>
+      <details><summary>What happens to my PDF after I upload it?</summary><p>It is read by an AI service to pick out your score, cards and loans, and deleted right after. We keep only the details it picked out.</p></details>
+    </div>
+    <div class="qs" id="c3" hidden>
+      <details open><summary>How is "Due This Month" calculated?</summary><p>It adds this month's due for every card and the EMI of every open loan in My Data, and takes off what you marked as paid.</p></details>
+      <details><summary>How do bill reminders work?</summary><p>Reminders are set on your phone 3 days before, 1 day before and on each due date, if you turn them on and allow notifications.</p></details>
+    </div>
+  </div>
+  <p class="example" style="margin-top:18px">In the real site these questions come from the app's FAQ file.</p>
+</div></section>
+
+<section><div class="wrap"><div class="cta">
+  <div class="cta-copy">
+    <span class="eyebrow" style="color:#fff">Android first</span>
+    <h2>SAARTI is coming soon on Google Play</h2>
+    <p>The Android app is almost ready. iPhone comes after that.</p>
+    <div><a class="btn btn-primary" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Coming soon on Google Play</a></div>
+  </div>
+  <div class="cta-photo"><img src="assets/images/people/model-cta.jpg" alt="Young woman using her phone"></div>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="f-grid">
+    <div class="f-brand">
+      <a class="brand" href="#"><img src="assets/images/brand/saarti-mark.png" alt=""><span><b>SAARTI</b><small>A Product by <strong>SAARTI TRADERS</strong></small></span></a>
+      <p class="disc">SAARTI is an information and tracking tool. It is not a bank or lender, does not give loans, and is not linked to CIBIL/TransUnion or any bank. It does not give financial advice.</p>
+    </div>
+    <div><h4>Pages</h4><ul><li><a href="#">Home</a></li><li><a href="#features">Features</a></li><li><a href="#faq">Help &amp; FAQ</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Delete account</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>Support<br><b style="color:#fff">support@saarti.in</b></li><li>Grievance Officer: Sahil Kumar<br><b style="color:#fff">grievance@saarti.in</b></li><li>Delhi, India</li></ul></div>
+  </div>
+  <div class="f-bot"><span>© 2026 Saarti Traders</span><span>Privacy Policy · Terms · Delete account</span></div>
+</div></footer>
+
+<script>
+(()=>{
+  const rail=document.getElementById('rail');
+  document.querySelectorAll('.arrow').forEach(b=>b.addEventListener('click',()=>{
+    const card=rail.querySelector('.svc');rail.scrollBy({left:(card.offsetWidth+22)*Number(b.dataset.dir),behavior:'smooth'});
+  }));
+  const wire=(sel,attr)=>{const btns=[...document.querySelectorAll(sel)];btns.forEach(b=>b.addEventListener('click',()=>{
+    btns.forEach(x=>{x.setAttribute('aria-selected',x===b);document.getElementById(x.dataset[attr]).hidden=x!==b;});
+  }));};
+  wire('.tab','p');wire('.cat','c');
+})();
+</script>
