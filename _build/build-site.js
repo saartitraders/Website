@@ -160,6 +160,8 @@ const ICONS = {
   bin: '<path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15"/>',
   shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
   pin: '<path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+  key: '<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/>',
   doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>',
 };
 const icon = (name, width = 2) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
@@ -466,7 +468,11 @@ ${faqInCat(c).slice(0, HOME.faq.perCategory).map((f, j) => `      ${faqDetails({
 };
 
 // Legal text format (same as the app): blank line between paragraphs, "## " = heading,
-// "• " = bullet, "1. " = numbered lead line
+// "• " / "- " / "* " = bullet, "### " = sub-heading, "1. " = numbered lead line.
+// A short line with no end punctuation directly above bullets (e.g. "Your account") is a
+// sub-heading. Other lines next to each other (address blocks) stay together with <br>.
+const BULLET_RE = /^(?:[•*]|-(?!-))\s+/;
+const isSubLabel = (line) => line.length <= 60 && !/[.:;,!?]$/.test(line) && !/^\d+\.\s/.test(line);
 const renderLegal = (text) => {
   const html = [];
   const toc = [];
@@ -474,6 +480,10 @@ const renderLegal = (text) => {
   for (const p of paragraphs) {
     if (p === legal.LEGAL_VERSION_LINE) {
       html.push(`<p class="version">${icon('doc')}${inline(p)}</p>`);
+      continue;
+    }
+    if (p.startsWith('### ')) {
+      html.push(`<h3>${inline(p.slice(4).trim())}</h3>`);
       continue;
     }
     if (p.startsWith('## ')) {
@@ -484,23 +494,40 @@ const renderLegal = (text) => {
       html.push(`<h2 id="${id}">${inline(title)}</h2>`);
       continue;
     }
+    const lines = p.split('\n').map((l) => l.trim()).filter(Boolean);
     let bullets = [];
-    const flush = () => {
+    let plain = [];
+    const flushBullets = () => {
       if (!bullets.length) return;
       html.push(`<ul>\n${bullets.map((b) => `  <li>${inline(b)}</li>`).join('\n')}\n</ul>`);
       bullets = [];
     };
-    for (const raw of p.split('\n')) {
-      const line = raw.trim();
-      if (!line) continue;
-      if (line.startsWith('• ')) {
-        bullets.push(line.slice(2).trim());
-        continue;
+    const flushPlain = () => {
+      if (!plain.length) return;
+      html.push(`<p>${plain.map(inline).join('<br>')}</p>`);
+      plain = [];
+    };
+    lines.forEach((line, i) => {
+      if (BULLET_RE.test(line)) {
+        flushPlain();
+        bullets.push(line.replace(BULLET_RE, '').trim());
+        return;
       }
-      flush();
-      html.push(/^\d+\.\s/.test(line) ? `<p class="lead">${inline(line)}</p>` : `<p>${inline(line)}</p>`);
-    }
-    flush();
+      flushBullets();
+      if (line.startsWith('### ')) {
+        flushPlain();
+        html.push(`<h3>${inline(line.slice(4).trim())}</h3>`);
+      } else if (/^\d+\.\s/.test(line)) {
+        flushPlain();
+        html.push(`<p class="lead">${inline(line)}</p>`);
+      } else if (isSubLabel(line) && plain.length === 0 && BULLET_RE.test(lines[i + 1] || '')) {
+        html.push(`<h3>${inline(line)}</h3>`);
+      } else {
+        plain.push(line);
+      }
+    });
+    flushBullets();
+    flushPlain();
   }
   if (!text.includes(legal.LEGAL_VERSION_LINE)) warn('A legal text does not contain the version line.');
   return { html: html.join('\n'), toc };

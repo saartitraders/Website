@@ -34,6 +34,7 @@ const FAQ_CATEGORIES = [
       'Does SAARTI read my SMS, bank account or contacts?',
       'How do I download or delete my data and my account?',
       'How do I change my password, or reset it if I forgot it?',
+      'I forgot my app PIN',
       'How do I contact you?',
     ],
   },
@@ -103,7 +104,7 @@ const HOME = {
     titleAfter: ' monthly plan.',
     lead: 'SAARTI keeps your credit cards, loans and EMIs in one place, shows what is due this month, reminds you before due dates and checks your CIBIL report against your own records.',
     secondaryCta: 'See how it works',
-    trust: ['No card number, CVV or PIN', 'Made for India'],
+    trust: ['No full card number, CVV or PIN', 'Made for India'],
     screen: 'assets/images/screens/screen-1-home.jpg',
     // Example cards drawn with CSS; the figures are labelled "Example figures" on the page
     cards: [
@@ -117,9 +118,9 @@ const HOME = {
   },
 
   steps: [
-    { title: 'Add cards & loans', text: 'Type them in, or read them from your CIBIL report.' },
+    { title: 'Add cards & loans', text: 'Type in your cards, bank loans and loans from friends, family or a local financer.' },
     { title: 'Upload your CIBIL PDF', text: 'AI reads your score and accounts. The PDF is deleted after.' },
-    { title: 'Compare & fix', text: 'See what does not match and how to raise a dispute.' },
+    { title: 'Compare & fix', text: 'See what does not match and get a complaint letter draft to send yourself.' },
     { title: 'Pay on time', text: 'One monthly due, reminders, and mark bills as paid.' },
   ],
 
@@ -130,11 +131,14 @@ const HOME = {
     items: [
       { icon: 'card', title: 'Cards & loans', text: 'Limit, outstanding, EMIs and due dates for every card and loan, in one list.', faq: 'How do I add cards, card EMIs and loans?' },
       { icon: 'calendar', title: 'Monthly due', text: 'One total for this month. Mark a bill as paid and the total updates.', faq: 'How is "Due This Month" calculated?' },
-      { icon: 'bell', title: 'Bill reminders', text: 'Notifications on your phone before each due date. Only the bank name, never an amount.', faq: 'How do bill reminders work?' },
+      { icon: 'bell', title: 'Bill reminders', text: 'Notifications on your phone before each due date. Never an amount or a bank or lender name, only text like "A bill is due tomorrow".', faq: 'How do bill reminders work?' },
       { icon: 'file', title: 'CIBIL PDF, read by AI', text: 'Upload your report PDF. Your score and accounts are picked out for you, then the PDF is deleted.', faq: 'How do I get my CIBIL report PDF and what happens to it after I upload it?' },
-      { icon: 'swap', title: 'Compare & dispute', text: 'CIBIL vs your own data, side by side. Steps to dispute on the CIBIL website.', faq: null },
+      { icon: 'swap', title: 'Compare & dispute', text: 'CIBIL vs your own data, side by side. The app makes a complaint letter draft that you send yourself from your own email app.', faq: null },
+      { icon: 'users', title: 'Loans from people you know', text: 'Add loans from friends, family or a local financer, repaid daily, weekly or monthly.', faq: null },
       { icon: 'calc', title: 'EMI calculator', text: 'EMI, total interest and a year-by-year plan from amount, rate and tenure.', faq: null },
-      { icon: 'download', title: 'Download your data', text: 'Get everything you saved as a PDF or Excel file, any time.', faq: 'How do I download or delete my data and my account?' },
+      { icon: 'download', title: 'Download your data', text: 'Get everything you saved as a PDF, Excel or JSON file, any time.', faq: 'How do I download or delete my data and my account?' },
+      { icon: 'key', title: 'Continue with Google', text: 'Sign in with your Google account, with no password to remember. Or use your email and a password.', faq: null },
+      { icon: 'lock', title: 'App lock', text: 'Lock the app with a PIN, fingerprint or face. Your phone checks it; we never receive it.', faq: 'I forgot my app PIN' },
     ],
   },
 
@@ -193,9 +197,9 @@ const HOME = {
         label: '3 · Dispute',
         screen: 'assets/images/screens/screen-2-my-data.jpg',
         alt: 'My Data tab with cards and loans',
-        title: 'Raise a dispute on the CIBIL website',
-        text: 'If something on your report is wrong, the app shows you how to raise a dispute with CIBIL yourself, and keeps your own records correct in the meantime.',
-        note: 'SAARTI is not linked to CIBIL or TransUnion.',
+        title: 'Get a complaint letter draft',
+        text: 'If something on your report is wrong, the app makes a complaint letter draft on your phone and opens it in your own email app. You read it, change it if needed, and decide whether to send it and to whom.',
+        note: 'SAARTI sends nothing to CIBIL, banks or lenders, and is not linked to CIBIL or TransUnion.',
       },
     ],
   },
@@ -218,7 +222,7 @@ const HOME = {
     items: [
       { icon: 'lock', title: 'No sensitive codes', text: 'Never your full card number, CVV, PIN or bank password.' },
       { icon: 'fileDone', title: 'PDF deleted after reading', text: 'Only the details picked out are kept.' },
-      { icon: 'download', title: 'Download your data', text: 'As PDF or Excel, whenever you want.' },
+      { icon: 'download', title: 'Download your data', text: 'As a PDF, Excel or JSON file, whenever you want.' },
       { icon: 'bin', title: 'Delete any time', text: 'Delete your account and all your data from Profile.' },
     ],
   },
@@ -253,11 +257,14 @@ const ABOUT = {
       bullets: [
         'Keeps your credit cards and loans in one list, with limits, outstanding amounts, EMIs and due dates.',
         'Shows one total for what is due this month. Mark a bill as paid and the total updates.',
-        'Sets bill reminders on your phone before each due date, if you turn them on.',
+        'Sets bill reminders on your phone before each due date, if you turn them on. A reminder never shows an amount or a bank or lender name, only text like "A bill is due tomorrow".',
         'Reads your CIBIL report PDF with AI to pick out your score and accounts. The PDF is deleted right after it is read.',
-        'Puts your CIBIL accounts next to your own records and shows how to raise a dispute on the CIBIL website.',
+        'Puts your CIBIL accounts next to your own records and makes a complaint letter draft that you send yourself from your own email app.',
         'Works out EMI, total interest and a year-by-year plan with the EMI calculator.',
-        'Lets you download your data as a PDF or Excel file, and delete your account at any time.',
+        'Lets you add loans from friends, family or a local financer, repaid daily, weekly or monthly.',
+        'Lets you sign in with Continue with Google, or with your email and a password.',
+        'Can lock the app with a PIN, fingerprint or face. Your phone checks it; we never receive it.',
+        'Lets you download your data as a PDF, Excel or JSON file, and delete your account at any time.',
       ],
     },
     {
@@ -265,6 +272,7 @@ const ABOUT = {
       bullets: [
         'It is not a bank or lender, and it does not give loans.',
         'It is not linked to CIBIL/TransUnion or to any bank.',
+        'It sends nothing to CIBIL, banks or lenders for you. You send any complaint letter yourself.',
         'It does not give financial advice. You make your own decisions.',
       ],
     },

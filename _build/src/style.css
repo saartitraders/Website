@@ -278,6 +278,7 @@ footer .mail{color:#fff;font-weight:700;overflow-wrap:anywhere}
 .doc .version{margin:0 0 18px}
 .doc h2{font-size:21px;margin:30px 0 10px;color:var(--ink);scroll-margin-top:96px}
 .doc h2:first-of-type{margin-top:10px}
+.doc h3{font-size:16px;margin:18px 0 6px;color:var(--ink)}
 .doc p{margin:0 0 10px;overflow-wrap:anywhere}
 .doc p.lead{font-weight:700;margin-top:16px}
 .doc ul{margin:0 0 14px;padding-left:22px}
